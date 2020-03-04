@@ -54,6 +54,10 @@ dependencies {
     implementation deps.retrofit.converter
     implementation deps.retrofit.adapter
 
+    implementation deps.androidx.room.runtime
+    kapt deps.androidx.room.compiler
+    implementation deps.androidx.room.coroutines
+
     implementation deps.okhttp.core
     implementation deps.okhttp.logging
     implementation deps.google.gson
