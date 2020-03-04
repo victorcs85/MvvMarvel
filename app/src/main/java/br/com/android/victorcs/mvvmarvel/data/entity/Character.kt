@@ -1,6 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.data.entity
 
-data class Result(
+data class Character(
     val comics: Comics,
     val description: String,
     val events: Events,

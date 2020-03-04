@@ -7,6 +7,9 @@ android {
     compileSdkVersion versions.compileSdkVersion
     buildToolsVersion versions.buildToolsVersion
 
+    def Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
     defaultConfig {
         applicationId "br.com.android.victorcs.mvvmarvel"
         minSdkVersion versions.minSdkVersion
@@ -15,6 +18,11 @@ android {
         versionName versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+//        resValue("String", "API_URL_BASE", properties.getProperty("api_url_base"))
+//        resValue("String", "API_KEY", properties.getProperty("private_key"))
+        buildConfigField "String", "API_URL_BASE", properties.getProperty("api_url_base")
+        buildConfigField "String", "API_KEY", properties.getProperty("private_key")
     }
 
     buildTypes {
