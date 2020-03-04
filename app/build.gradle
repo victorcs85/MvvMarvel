@@ -42,6 +42,17 @@ dependencies {
     kapt  deps.dagger.processor
     kapt  deps.dagger.support
 
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converter
+    implementation deps.retrofit.adapter
+
+    implementation deps.okhttp.core
+    implementation deps.okhttp.logging
+    implementation deps.google.gson
+
+    implementation  deps.coroutines.core
+    implementation  deps.coroutines.android
+
     testImplementation deps.test.junit.junit
     androidTestImplementation deps.test.junit.ext
     implementation deps.androidx.test.espresso
