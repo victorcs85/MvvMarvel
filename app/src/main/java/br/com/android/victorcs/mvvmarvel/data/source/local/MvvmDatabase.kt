@@ -3,6 +3,7 @@ package br.com.android.victorcs.mvvmarvel.data.source.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import br.com.android.victorcs.mvvmarvel.data.model.*
+import br.com.android.victorcs.mvvmarvel.data.source.local.dao.*
 
 @Database(
     entities = [
@@ -21,5 +22,11 @@ abstract class MvvmDatabase : RoomDatabase() {
         const val DB_VERSION = 1
     }
 
-    abstract fun getCharacterList()
+    abstract fun getCharacterDao(): CharacterDao
+    abstract fun getComicsDao(): ComicsDao
+    abstract fun getGenericItemDao(): GenericItemDao
+    abstract fun getGenericListDao(): GenericListDao
+    abstract fun getThumbnailDao(): ThumbnailDao
+    abstract fun getUrlDao(): UrlDao
+
 }

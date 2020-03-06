@@ -4,15 +4,15 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import br.com.android.victorcs.mvvmarvel.data.model.Comics
+import br.com.android.victorcs.mvvmarvel.data.model.Thumbnail
 
 @Dao
-interface ComicsDao {
+interface ThumbnailDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertComics(character: Comics): Long
+    suspend fun insertThumbnail(thumbnail: Thumbnail): Long
 
     @Delete
-    suspend fun deleteComics(character: Comics): Int
+    suspend fun deleteThumbnail(thumbnail: Thumbnail): Int
 
 }

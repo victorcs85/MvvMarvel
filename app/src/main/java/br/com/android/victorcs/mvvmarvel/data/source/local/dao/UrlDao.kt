@@ -4,15 +4,15 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import br.com.android.victorcs.mvvmarvel.data.model.Comics
+import br.com.android.victorcs.mvvmarvel.data.model.Url
 
 @Dao
-interface ComicsDao {
+interface UrlDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertComics(character: Comics): Long
+    suspend fun insertUrl(url: Url): Long
 
     @Delete
-    suspend fun deleteComics(character: Comics): Int
+    suspend fun deleteUrl(url: Url): Int
 
 }

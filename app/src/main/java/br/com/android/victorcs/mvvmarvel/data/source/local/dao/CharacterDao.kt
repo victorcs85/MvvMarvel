@@ -2,6 +2,7 @@ package br.com.android.victorcs.mvvmarvel.data.source.local.dao
 
 import androidx.room.*
 import br.com.android.victorcs.mvvmarvel.data.model.Character
+import br.com.android.victorcs.mvvmarvel.data.source.local.converter.CharacterConverter
 
 @Dao
 interface CharacterDao {
@@ -12,7 +13,11 @@ interface CharacterDao {
     @Delete
     suspend fun deleteCharacter(character: Character): Int
 
-    @Query("SELECT * from Character")
-    suspend fun getCharacterList(): MutableList<Character>
+    @TypeConverters(CharacterConverter::class)
+    @Query("SELECT * from character")
+    suspend fun getCharacterList(): List<Character>
+
+    @TypeConverters(CharacterConverter::class)
+    suspend fun setCharacterList(items: List<Character>)
 
 }
