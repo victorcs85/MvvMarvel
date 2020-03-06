@@ -43,6 +43,8 @@ dependencies {
 
     implementation deps.androidx.multidex
 
+    implementation deps.timber
+
     implementation  deps.dagger.dagger
     implementation  deps.dagger.android
     implementation  deps.dagger.support
