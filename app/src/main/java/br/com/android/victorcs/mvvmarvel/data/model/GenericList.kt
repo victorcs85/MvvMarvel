@@ -9,6 +9,6 @@ data class GenericList(
     val available: Int?,
     val collectionURI: String?,
     @Embedded
-    val item: GenericItem?,
+    val item: List<GenericItem>?,
     val returned: Int?
 )

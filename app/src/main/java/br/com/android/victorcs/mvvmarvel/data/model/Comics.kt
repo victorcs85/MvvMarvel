@@ -12,7 +12,7 @@ data class Comics(
     val collectionURI: String? = "",
     @Embedded
     @ColumnInfo(name = "comics_items")
-    val item: GenericItem?,
+    val item: List<GenericItem>?,
     @ColumnInfo(name = "comics_returned")
     val returned: Int? = 0
 )
