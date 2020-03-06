@@ -14,4 +14,5 @@ interface CharacterDao {
 
     @Query("SELECT * from Character")
     suspend fun getCharacterList(): MutableList<Character>
+
 }
