@@ -1,6 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.domain.model
 
-data class StoriesDto(
+data class GenericListDto(
     val available: Int?,
     val collectionURI: String?,
     val items: List<GenericItemDto>?,

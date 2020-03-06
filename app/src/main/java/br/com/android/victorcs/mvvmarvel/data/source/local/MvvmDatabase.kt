@@ -8,10 +8,8 @@ import br.com.android.victorcs.mvvmarvel.data.model.*
     entities = [
         Character::class,
         Comics::class,
-        Events::class,
+        GenericList::class,
         GenericItem::class,
-        Series::class,
-        Stories::class,
         Thumbnail::class,
         Url::class
     ], version = MvvmDatabase.DB_VERSION
