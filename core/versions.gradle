@@ -1,0 +1,113 @@
+def version = [:]
+version.compileSdk = 31
+version.versionCode = 1
+version.versionName = '1.0'
+version.minSdk = 21
+version.targetSdk = 31
+version.room = '2.3.0'
+version.cardView = '1.0.0'
+version.fragment = '1.3.0'
+version.constraintLayout = "2.0.4"
+version.glide = '4.9.0'
+version.gradle = '4.0.1'
+version.kotlin = '1.5.30'
+version.lifecycle = '2.2.0'
+version.multidex = '1.0.3'
+version.material = "1.4.0"
+version.navigation = "2.3.4"
+version.okhttp = "3.9.1"
+version.retrofit = '2.9.0'
+version.moshi = '1.11.0'
+version.recyclerView = "1.0.0"
+version.supportLibrary = '1.3.1'
+version.koin = '2.2.3'
+version.timber = "4.7.1"
+version.jacoco = '0.8.7'
+version.coroutines = '1.4.2'
+version.detekt = '1.10.0'
+version.coreKtx = '1.6.0'
+
+def androidx = [:]
+androidx.core_ktx = "androidx.core:core-ktx:$version.coreKtx"
+androidx.appcompat = "androidx.appcompat:appcompat:$version.supportLibrary"
+androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$version.constraintLayout"
+androidx.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$version.lifecycle"
+androidx.lifecycle_ext = "androidx.lifecycle:lifecycle-extensions:$version.lifecycle"
+androidx.lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version.lifecycle"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:$version.recyclerView"
+androidx.navigation_fragment = "androidx.navigation:navigation-fragment-ktx:$version.navigation"
+androidx.navigation_ui = "androidx.navigation:navigation-ui-ktx:$version.navigation"
+androidx.room_runtime = "androidx.room:room-runtime:$version.room"
+androidx.room_ktx = "androidx.room:room-ktx:$version.room"
+androidx.room_compiler = "androidx.room:room-compiler:$version.room"
+
+def classpath = [:]
+classpath.gradle = "com.android.tools.build:gradle:$version.gradle"
+classpath.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version.kotlin"
+classpath.jacoco = "org.jacoco:org.jacoco.core:$version.jacoco"
+classpath.detetk = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version.detekt"
+
+def koin = [:]
+koin.android = "io.insert-koin:koin-android:$version.koin"
+koin.viewmodel = "io.insert-koin:koin-androidx-viewmodel:$version.koin"
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$version.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$version.glide"
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version.kotlin"
+
+def material = [:]
+material.runtime = "com.google.android.material:material:$version.material"
+
+def support = [:]
+support.card_view = "androidx.cardview:cardview:$version.cardView"
+support.multidex = "com.android.support:multidex:$version.multidex"
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$version.okhttp"
+okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$version.okhttp"
+
+def others = [:]
+others.lottie = "com.airbnb.android:lottie:$version.lottie"
+others.shimmer = "com.facebook.shimmer:shimmer:$version.shimmer"
+others.timber = "com.jakewharton.timber:timber:$version.timber"
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$version.retrofit"
+retrofit.converter_moshi = "com.squareup.retrofit2:converter-moshi:$version.retrofit"
+
+def moshi = [:]
+moshi.runtime =  "com.squareup.moshi:moshi-kotlin:$version.moshi"
+moshi.adapters =  "com.squareup.moshi:moshi-adapters:$version.moshi"
+
+def coroutines = [:]
+coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version.coroutines"
+
+def dependencies = [:]
+dependencies.androidx = androidx
+dependencies.classpath = classpath
+dependencies.glide = glide
+dependencies.kotlin = kotlin
+dependencies.material = material
+dependencies.okhttp = okhttp
+dependencies.others = others
+dependencies.support = support
+dependencies.retrofit = retrofit
+dependencies.moshi = moshi
+dependencies.version = version
+dependencies.koin = koin
+dependencies.coroutines = coroutines
+
+ext.deps = dependencies
+
+def version_tests = [:]
+version_tests.junitVersion = '1.1.3'
+version_tests.expressoVersion = '3.4.0'
+
+def tests = [:]
+tests.junit = "androidx.test.ext:junit$version_tests.junitVersion"
+tests.expresso = "androidx.test.ext:junit$version_tests.expressoVersion"
+
+ext.deps_tests = tests

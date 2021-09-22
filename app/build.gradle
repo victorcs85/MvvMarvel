@@ -1,28 +1,30 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+//apply plugin: 'kotlin-android-extensions'
+
+apply from: "$rootDir/core/versions.gradle"
 
 android {
-    compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion versions.buildToolsVersion
+    compileSdkVersion deps.version.compileSdk
 
-    def Properties properties = new Properties()
+    Properties properties = new Properties()
     properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
     defaultConfig {
         applicationId "br.com.android.victorcs.mvvmarvel"
-        minSdkVersion versions.minSdkVersion
-        targetSdkVersion versions.targetSdkVersion
-        versionCode versions.versionCode
-        versionName versions.versionName
+        minSdkVersion deps.version.minSdk
+        targetSdkVersion deps.version.targetSdk
+        versionCode deps.version.versionCode
+        versionName deps.version.versionName
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-//        resValue("String", "API_URL_BASE", properties.getProperty("api_url_base"))
-//        resValue("String", "API_KEY", properties.getProperty("private_key"))
-        buildConfigField "String", "API_URL_BASE", properties.getProperty("api_url_base")
-        buildConfigField "String", "API_KEY", properties.getProperty("private_key")
+        buildConfigField "String", "API_URL_BASE", properties.getProperty("default.api_url_base")
+        buildConfigField "String", "API_KEY", properties.getProperty("default.private_key")
     }
 
     buildTypes {
@@ -32,42 +34,53 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
+
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlin.jdk
+
     implementation deps.androidx.appcompat
-    implementation deps.androidx.core
-    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.constraint_layout
 
-    implementation deps.androidx.multidex
+    kapt deps.androidx.room_compiler
 
-    implementation deps.timber
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.lifecycle
+    implementation deps.androidx.lifecycle_ext
+    implementation deps.androidx.lifecycle_livedata
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.navigation_fragment
+    implementation deps.androidx.navigation_ui
+    implementation deps.androidx.room_runtime
+    implementation deps.androidx.room_ktx
 
-    implementation  deps.dagger.dagger
-    implementation  deps.dagger.android
-    implementation  deps.dagger.support
-    kapt  deps.dagger.compiler
-    kapt  deps.dagger.processor
-    kapt  deps.dagger.support
+    implementation deps.material.runtime
 
-    implementation deps.retrofit.core
-    implementation deps.retrofit.converter
-    implementation deps.retrofit.adapter
+    implementation deps.support.card_view
+    implementation deps.support.multidex
 
-    implementation deps.androidx.room.runtime
-    annotationProcessor deps.androidx.room.compiler
-    implementation deps.androidx.room.coroutines
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.converter_moshi
 
-    implementation deps.okhttp.core
+    implementation deps.moshi.runtime
+    implementation deps.moshi.adapters
+
+    implementation deps.okhttp.runtime
     implementation deps.okhttp.logging
-    implementation deps.google.gson
 
-    implementation  deps.coroutines.core
-    implementation  deps.coroutines.android
+    implementation deps.others.timber
 
-    testImplementation deps.test.junit.junit
-    androidTestImplementation deps.test.junit.ext
-    implementation deps.androidx.test.espresso
+    androidTestImplementation deps_tests.junit
+    androidTestImplementation deps_tests.expresso
+
 }
+
