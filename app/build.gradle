@@ -24,7 +24,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_URL_BASE", properties.getProperty("default.api_url_base")
-        buildConfigField "String", "API_KEY", properties.getProperty("default.private_key")
+        buildConfigField "String", "API_KEY", properties.getProperty("default.public_key")
+        buildConfigField "String", "API_TS", properties.getProperty("default.ts")
+        buildConfigField "String", "API_HASH", properties.getProperty("default.hash")
     }
 
     buildTypes {
