@@ -1,25 +1,22 @@
 package br.com.android.victorcs.mvvmarvel
 
 import android.content.Context
+import androidx.lifecycle.LifecycleObserver
 import androidx.multidex.MultiDex
-import br.com.android.victorcs.mvvmarvel.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import androidx.multidex.MultiDexApplication
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 
-class App : DaggerApplication() {
+class App : MultiDexApplication(), LifecycleObserver {
 
     //region Lifecycle
     override fun onCreate() {
         super.onCreate()
+        setupKoin()
         setupTimber()
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent
-            .builder()
-            .application(this)
-            .build()
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -29,6 +26,16 @@ class App : DaggerApplication() {
     //endregion
 
     //region Private
+    private fun setupKoin() {
+        startKoin {
+//            modules(
+//                ModuleInitializer.modules
+//            )
+            androidLogger(Level.DEBUG)
+            androidContext(this@App)
+        }
+    }
+
     private fun setupTimber(){
         if(BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

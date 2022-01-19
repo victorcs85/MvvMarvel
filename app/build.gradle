@@ -49,7 +49,8 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraint_layout
 
-    kapt deps.androidx.room_compiler
+    implementation deps.koin.compiler
+    implementation deps.koin.android
 
     implementation deps.androidx.core_ktx
     implementation deps.androidx.appcompat
@@ -60,8 +61,6 @@ dependencies {
     implementation deps.androidx.recyclerview
     implementation deps.androidx.navigation_fragment
     implementation deps.androidx.navigation_ui
-    implementation deps.androidx.room_runtime
-    implementation deps.androidx.room_ktx
 
     implementation deps.material.runtime
 

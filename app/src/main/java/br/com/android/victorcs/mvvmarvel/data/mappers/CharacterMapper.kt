@@ -4,17 +4,17 @@ import br.com.android.victorcs.mvvmarvel.data.model.*
 import br.com.android.victorcs.mvvmarvel.domain.model.*
 
 fun Character.map(): CharacterDto = CharacterDto(
-    comics = comics?.map(),
+    comics = comics.map(),
     description = description,
-    events = events?.map(),
+    events = events.map(),
     id = id,
     modified = modified,
     name = name,
     resourceURI = resourceURI,
-    series = series?.map(),
-    stories = stories?.map(),
-    thumbnail = thumbnail?.map(),
-    urls = urls?.mapUrlDto()
+    series = series.map(),
+    stories = stories.map(),
+    thumbnail = thumbnail.map(),
+    urls = urls.mapUrlDto()
 )
 
 fun Comics.map(): ComicsDto = ComicsDto(
