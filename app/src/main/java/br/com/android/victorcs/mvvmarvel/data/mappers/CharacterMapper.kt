@@ -1,52 +1,61 @@
 package br.com.android.victorcs.mvvmarvel.data.mappers
 
 import br.com.android.victorcs.mvvmarvel.data.model.*
+import br.com.android.victorcs.mvvmarvel.domain.mapper.DomainMapper
 import br.com.android.victorcs.mvvmarvel.domain.model.*
 
-fun Character.map(): CharacterDto = CharacterDto(
-    comics = comics.map(),
-    description = description,
-    events = events.map(),
-    id = id,
-    modified = modified,
-    name = name,
-    resourceURI = resourceURI,
-    series = series.map(),
-    stories = stories.map(),
-    thumbnail = thumbnail.map(),
-    urls = urls.mapUrlDto()
-)
+class CharacterMapper : DomainMapper<CharacterResponse, Character> {
+    override fun toDomain(from: CharacterResponse): Character = from.map()
 
-fun Comics.map(): ComicsDto = ComicsDto(
-    available = available,
-    collectionURI = collectionURI,
-    items = item?.mapGenericItemDto(),
-    returned = returned
-)
+    override fun toDomain(from: List<CharacterResponse>): List<Character> = from.map { toDomain(it) }
 
-fun GenericList.map(): GenericListDto = GenericListDto(
-    available = available,
-    returned = returned,
-    items = item?.mapGenericItemDto(),
-    collectionURI = collectionURI
-)
+    private fun CharacterResponse.map(): Character =
+        Character(
+            comics = comics.map(),
+            description = description,
+            events = events.map(),
+            id = id,
+            modified = modified,
+            name = name,
+            resourceURI = resourceURI,
+            series = series.map(),
+            stories = stories.map(),
+            thumbnail = thumbnail.map(),
+            urls = urls.mapUrlDto()
+        )
 
-fun Thumbnail.map(): ThumbnailDto = ThumbnailDto(
-    extension = extension,
-    path = path
-)
-
-fun List<GenericItem>.mapGenericItemDto(): List<GenericItemDto> = this.map { generic ->
-    GenericItemDto(
-        type = generic.type,
-        name = generic.name,
-        resourceUri = generic.resourceUri
+    private fun ComicsResponse.map(): Comics = Comics(
+        available = available,
+        collectionURI = collectionURI,
+        items = item?.mapGenericItemDto(),
+        returned = returned
     )
+
+    private fun GenericListResponse.map(): GenericList = GenericList(
+        available = available,
+        returned = returned,
+        items = item?.mapGenericItemDto(),
+        collectionURI = collectionURI
+    )
+
+    private fun ThumbnailResponse.map(): Thumbnail = Thumbnail(
+        extension = extension,
+        path = path
+    )
+
+    private fun List<GenericItemResponse>.mapGenericItemDto(): List<GenericItem> = this.map { generic ->
+        GenericItem(
+            type = generic.type,
+            name = generic.name,
+            resourceUri = generic.resourceUri
+        )
+    }
+
+    private fun List<UrlResponse>.mapUrlDto(): List<Url> = this.map { mUrl ->
+        Url(
+            type = mUrl.type,
+            url = mUrl.url
+        )
+    }
 }
 
-fun List<Url>.mapUrlDto(): List<UrlDto> = this.map { mUrl ->
-    UrlDto(
-        type = mUrl.type,
-        url = mUrl.url
-    )
-}

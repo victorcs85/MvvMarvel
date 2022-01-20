@@ -1,12 +1,11 @@
 package br.com.android.victorcs.mvvmarvel.data.remote
 
 import br.com.android.victorcs.mvvmarvel.data.model.BaseApiResponse
-import br.com.android.victorcs.mvvmarvel.data.model.Character
-import kotlinx.coroutines.Deferred
+import br.com.android.victorcs.mvvmarvel.data.model.CharacterResponse
 import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("characters")
-    fun getCharacterList(): Deferred<BaseApiResponse<Character>>
+    @GET("v1/public/characters?")
+    suspend fun getCharacterList(): BaseApiResponse<CharacterResponse>
 }
