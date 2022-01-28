@@ -14,10 +14,13 @@ object RetrofitConfig {
 
     private const val TIMEOUT = 30L
     private const val TIMEOUT_DEBUG = 120L
-    private const val TAG = ">>> RxJava"
 
     private const val EA_DURATION = 120L
     private const val FORBIDDEN = 403
+
+    private const val TS_KEY = "ts"
+    private const val APIKEY_KEY = "apikey"
+    private const val HASH_KEY = "hash"
 
     lateinit var api: ApiService
 
@@ -37,7 +40,9 @@ object RetrofitConfig {
             .build()
 
     private fun getFullHttpClient(): OkHttpClient.Builder = getHttpClient()
-        .addInterceptor(getHttpLogging())
+        .addInterceptor(getHttpLogging()).addInterceptor {
+                chain -> return@addInterceptor addApiKeyToRequests(chain)
+        }
 
     private fun getHttpLogging(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(
@@ -61,5 +66,17 @@ object RetrofitConfig {
         logging.level = HttpLoggingInterceptor.Level.BODY.takeIf { BuildConfig.DEBUG }
             ?: HttpLoggingInterceptor.Level.NONE
         return logging
+    }
+
+    private fun addApiKeyToRequests(chain: Interceptor.Chain): Response {
+        val request = chain.request().newBuilder()
+        val originalHttpUrl = chain.request().url()
+        val newUrl = originalHttpUrl.newBuilder()
+            .addQueryParameter(TS_KEY, BuildConfig.API_TS)
+            .addQueryParameter(APIKEY_KEY, BuildConfig.API_KEY)
+            .addQueryParameter(HASH_KEY, BuildConfig.API_HASH)
+            .build()
+        request.url(newUrl)
+        return chain.proceed(request.build())
     }
 }
