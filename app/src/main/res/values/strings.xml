@@ -5,4 +5,5 @@
     <string name="general_error">An error has occurred! Unable to load the information.</string>
 
     <string name="char_spider_man">Spider-Man</string>
+    <string name="characters_label">Personagens</string>
 </resources>

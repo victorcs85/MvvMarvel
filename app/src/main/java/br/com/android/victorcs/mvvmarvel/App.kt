@@ -2,8 +2,10 @@ package br.com.android.victorcs.mvvmarvel
 
 import android.content.Context
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import br.com.android.victorcs.mvvmarvel.di.ModuleInitializer
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,6 +17,7 @@ class App : MultiDexApplication(), LifecycleObserver {
     //region Lifecycle
     override fun onCreate() {
         super.onCreate()
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         setupKoin()
         setupTimber()
     }
@@ -28,11 +31,11 @@ class App : MultiDexApplication(), LifecycleObserver {
     //region Private
     private fun setupKoin() {
         startKoin {
-//            modules(
-//                ModuleInitializer.modules
-//            )
-            androidLogger(Level.DEBUG)
             androidContext(this@App)
+            modules(
+                ModuleInitializer.modules
+            )
+            androidLogger(Level.DEBUG)
         }
     }
 

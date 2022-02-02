@@ -12,7 +12,7 @@ class CharacterRepositoryImpl(
 ): ICharacterRepository {
     override suspend fun getCharacterList(): List<Character> {
         return async {
-            api.getCharacterList().dataResponse?.results?.map { mapper.toDomain(it) } ?: emptyList()
+            api.getCharacterList().data?.results?.map { mapper.toDomain(it) } ?: emptyList()
         }
     }
 }

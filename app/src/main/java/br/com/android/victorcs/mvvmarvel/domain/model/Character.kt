@@ -1,5 +1,9 @@
 package br.com.android.victorcs.mvvmarvel.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Character(
     val comics: Comics?,
     val description: String?,
@@ -12,4 +16,4 @@ data class Character(
     val stories: GenericList?,
     val thumbnail: Thumbnail?,
     val urls: List<Url>?
-)
+): Parcelable
