@@ -14,7 +14,7 @@ version.lifecycle = '2.2.0'
 version.multidex = '1.0.3'
 version.material = "1.4.0"
 version.navigation = "2.3.4"
-version.okhttp = "3.9.1"
+version.okhttp = "3.14.9"
 version.retrofit = '2.9.0'
 version.moshi = '1.11.0'
 version.recyclerView = "1.0.0"
@@ -68,7 +68,6 @@ okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$version.okhttp"
 
 def others = [:]
 others.lottie = "com.airbnb.android:lottie:$version.lottie"
-others.shimmer = "com.facebook.shimmer:shimmer:$version.shimmer"
 others.timber = "com.jakewharton.timber:timber:$version.timber"
 
 def retrofit = [:]

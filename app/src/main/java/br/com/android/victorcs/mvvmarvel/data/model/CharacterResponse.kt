@@ -1,7 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.data.model
 
 data class CharacterResponse(
-    val charId: Long,
     val comics: ComicsResponse,
     val description: String? = "",
     val events: GenericListResponse,

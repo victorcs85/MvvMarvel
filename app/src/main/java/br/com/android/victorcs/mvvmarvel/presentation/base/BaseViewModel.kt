@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
+import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
@@ -14,7 +15,7 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
     val loading: LiveData<Boolean> = _loading
 
     protected fun launch(
-        errorBlock: ((Throwable) -> Unit),
+        errorBlock: ((Throwable) -> Unit?)? = null,
         block: suspend CoroutineScope.() -> Unit
     ) =
         viewModelScope.launch {
@@ -23,7 +24,8 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
                 .onSuccess { _loading.postValue(false) }
                 .onFailure { error ->
                     _loading.postValue(false)
-                    errorBlock.invoke(error)
+                    if (errorBlock != null) errorBlock.invoke(error)
+                    else Timber.e(error)
                 }
         }
 }

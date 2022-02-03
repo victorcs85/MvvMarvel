@@ -24,7 +24,6 @@ class CharactersAdapter(
                 .inflate(R.layout.item_list_character, parent, false)
         )
 
-
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) =
         holder.bindView(getItem(position))
 
@@ -49,7 +48,7 @@ class CharactersAdapter(
             characterName.text = character.name
             try {
                 Glide.with(itemView.context)
-                    .load(character.thumbnail)
+                    .load(character.thumbnail?.pathMedium.orEmpty())
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(characterImage)
             } catch (ex: Exception) {

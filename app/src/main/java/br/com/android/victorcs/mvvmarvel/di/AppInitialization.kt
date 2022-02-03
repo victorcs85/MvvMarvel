@@ -30,5 +30,11 @@ class AppInitialization : ModulesInitialization() {
                 single<ICharacterRepository> { CharacterRepositoryImpl(api = get(), mapper = get()) }
                 viewModel { CharactersViewModel(charactersRepository = get()) }
             }
+//                    module {
+//                mapperModule
+//                apiModule
+//                repositoryModule
+//                viewModelModule
+//            }
         )
 }

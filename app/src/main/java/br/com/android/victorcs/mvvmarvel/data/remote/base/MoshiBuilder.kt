@@ -7,6 +7,7 @@ import java.util.*
 
 object MoshiBuilder {
     fun create(): Moshi = Moshi.Builder()
+        .add(DefaultIfNullFactory())
         .add(Date::class.java, Rfc3339DateJsonAdapter())
         .addLast(KotlinJsonAdapterFactory())
         .build()

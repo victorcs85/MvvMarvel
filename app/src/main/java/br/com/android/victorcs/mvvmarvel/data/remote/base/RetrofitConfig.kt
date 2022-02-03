@@ -1,28 +1,21 @@
 package br.com.android.victorcs.mvvmarvel.data.remote.base
 
 import br.com.android.victorcs.mvvmarvel.BuildConfig
-import br.com.android.victorcs.mvvmarvel.data.remote.ApiService
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.component.KoinComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
-import okhttp3.OkHttpClient
 
-
-object RetrofitConfig {
+object RetrofitConfig: KoinComponent {
 
     private const val TIMEOUT = 30L
     private const val TIMEOUT_DEBUG = 120L
 
-    private const val EA_DURATION = 120L
-    private const val FORBIDDEN = 403
-
     private const val TS_KEY = "ts"
     private const val APIKEY_KEY = "apikey"
     private const val HASH_KEY = "hash"
-
-    lateinit var api: ApiService
 
     fun <T> create(
         service: Class<T>,
@@ -59,7 +52,6 @@ object RetrofitConfig {
             .readTimeout(timeout, TimeUnit.SECONDS)
             .addInterceptor(getBasicInterceptor())
     }
-
 
     private fun getBasicInterceptor(): Interceptor {
         val logging = HttpLoggingInterceptor()

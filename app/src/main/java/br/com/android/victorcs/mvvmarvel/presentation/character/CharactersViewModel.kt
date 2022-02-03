@@ -2,10 +2,12 @@ package br.com.android.victorcs.mvvmarvel.presentation.character
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import br.com.android.victorcs.mvvmarvel.domain.repository.ICharacterRepository
 import br.com.android.victorcs.mvvmarvel.presentation.base.BaseViewModel
 import org.koin.core.component.KoinComponent
+import timber.log.Timber
 
 class CharactersViewModel(
     private val charactersRepository: ICharacterRepository
@@ -17,10 +19,9 @@ class CharactersViewModel(
     fun loadCharacters() {
         launch(
             block = {
-                _characters.postValue(charactersRepository.getCharacterList())
-            },
-            errorBlock = {
-                //TODO
+                _characters.postValue(
+                    charactersRepository.getCharacterList()
+                )
             }
         )
     }
