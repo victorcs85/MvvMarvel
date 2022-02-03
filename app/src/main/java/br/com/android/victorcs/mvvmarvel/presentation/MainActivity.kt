@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupNavController()
         setupViews()
-//        initViewModel()
+        initViewModel()
     }
 
     private fun initViewModel() {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideLoading() {
         loadingView?.visibility = View.GONE
-        loadingView?.visibility = View.VISIBLE
+        container?.visibility = View.VISIBLE
     }
 
     private fun setupNavController() {
