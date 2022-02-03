@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android.victorcs.mvvmarvel.R
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
+
+private const val NUMBER_COLUMNS = 2
 
 class CharactersFragment: Fragment() {
 
@@ -43,7 +44,6 @@ class CharactersFragment: Fragment() {
 
     private fun setupViewModel() {
         viewModel.character.observe(viewLifecycleOwner) { characters ->
-            Timber.d("CHARACTERS === ${characters.size}")
             characterAdapter.submitList(characters)
         }
     }
@@ -51,7 +51,7 @@ class CharactersFragment: Fragment() {
     private fun initComponents() {
         rvCharacters = activity?.findViewById(R.id.rv_characters) as? RecyclerView
         rvCharacters?.apply {
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
+            layoutManager = GridLayoutManager(context, NUMBER_COLUMNS)
             adapter = characterAdapter
         }
     }
