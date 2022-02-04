@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android.victorcs.mvvmarvel.R
@@ -14,6 +15,8 @@ import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val NUMBER_COLUMNS = 2
+const val CHARACTER_URL_KEY = "mvvmarvel_character_url"
+const val CHARACTER_NAME_KEY = "mvvmarvel_character_name"
 
 class CharactersFragment: Fragment() {
 
@@ -57,6 +60,17 @@ class CharactersFragment: Fragment() {
     }
 
     private fun onClickCharacter(character: Character) {
-
+        val characterUrl = viewModel.getCharacterUrl(character)
+        findNavController().run {
+            if (currentDestination?.id == R.id.charactersFragment) {
+                navigate(
+                    R.id.action_departmentListFragment_to_departmentDetailFragment,
+                    bundleOf(
+                        CHARACTER_URL_KEY to characterUrl,
+                        CHARACTER_NAME_KEY to character.name
+                    )
+                )
+            }
+        }
     }
 }

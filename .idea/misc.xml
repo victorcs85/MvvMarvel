@@ -9,7 +9,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/drawable/ic_error_black.xml" value="0.2212962962962963" />
+        <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/drawable/slide_to_left.xml" value="0.25833333333333336" />
         <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/layout/fragment_character_details.xml" value="0.11778115501519756" />
         <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/layout/fragment_characters.xml" value="0.11778115501519756" />
         <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/layout/item_list_character.xml" value="0.25462962962962965" />
         <entry key="..\:/Workspace/Android/MvvMarvel/app/src/main/res/layout/view_error.xml" value="0.17889492753623187" />

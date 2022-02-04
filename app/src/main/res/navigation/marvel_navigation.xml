@@ -9,5 +9,28 @@
         android:id="@+id/charactersFragment"
         android:name="br.com.android.victorcs.mvvmarvel.presentation.character.CharactersFragment"
         android:label="@string/characters_label"
-        tools:layout="@layout/fragment_characters"/>
+        tools:layout="@layout/fragment_characters">
+
+        <action
+            android:id="@+id/action_departmentListFragment_to_departmentDetailFragment"
+            app:destination="@id/characterDetailsFragment"
+            app:enterAnim="@anim/slide_to_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_to_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="br.com.android.victorcs.mvvmarvel.presentation.character.CharacterDetailsFragment"
+        android:label="{characterName}"
+        tools:layout="@layout/fragment_character_details">
+
+        <argument
+            android:name="characterName"
+            android:defaultValue="Detalhes do personagem"
+            app:argType="string" />
+
+    </fragment>
 </navigation>
