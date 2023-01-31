@@ -11,13 +11,13 @@ class DefaultIfNullFactory: JsonAdapter.Factory {
         type: Type,
         annotations: MutableSet<out Annotation>,
         moshi: Moshi
-    ): JsonAdapter<*>? {
+    ): JsonAdapter<*> {
         val delegate = moshi.nextAdapter<Any>(this, type, annotations)
         return object : JsonAdapter<Any>() {
             override fun fromJson(reader: JsonReader): Any? {
                 val blob1 = reader.readJsonValue()
                 return try {
-                    val blob = blob1 as? Map<String, Any?>
+                    val blob = blob1 as? Map<*, *>
                     blob?.let {
                         val noNulls = blob.filterValues { it != null }
                         delegate.fromJsonValue(noNulls)
@@ -26,9 +26,7 @@ class DefaultIfNullFactory: JsonAdapter.Factory {
                     delegate.fromJsonValue(blob1)
                 }
             }
-            override fun toJson(writer: JsonWriter, value: Any?) {
-                return delegate.toJson(writer, value)
-            }
+            override fun toJson(writer: JsonWriter, value: Any?) = delegate.toJson(writer, value)
         }
     }
 }

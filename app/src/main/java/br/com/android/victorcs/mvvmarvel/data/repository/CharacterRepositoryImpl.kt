@@ -10,9 +10,7 @@ class CharacterRepositoryImpl(
     private val api: ApiService,
     private val mapper: CharacterMapper
 ): ICharacterRepository {
-    override suspend fun getCharacterList(): List<Character> {
-        return async {
-            api.getCharacterList().data?.results?.map { mapper.toDomain(it) } ?: emptyList()
-        }
+    override suspend fun getCharacterList(): List<Character> = async {
+        api.getCharacterList().data?.results?.map { mapper.toDomain(it) } ?: emptyList()
     }
 }

@@ -32,13 +32,11 @@ class MainActivity : AppCompatActivity() {
         initViewModel()
     }
 
-    private fun initViewModel() {
-        viewModel.loading.observe(this) { isShow ->
-            if (isShow) {
-                showLoading()
-            } else {
-                hideLoading()
-            }
+    private fun initViewModel() = viewModel.loading.observe(this) { isShow ->
+        if (isShow) {
+            showLoading()
+        } else {
+            hideLoading()
         }
     }
 
@@ -63,7 +61,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val graph =
             navHostFragment.navController.navInflater.inflate(R.navigation.marvel_navigation)
-
         navHostFragment.navController.graph = graph
         navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)

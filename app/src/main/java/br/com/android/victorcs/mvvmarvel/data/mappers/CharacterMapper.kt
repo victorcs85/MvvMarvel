@@ -1,5 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.data.mappers
 
+import br.com.android.victorcs.mvvmarvel.data.extensions.toHttps
 import br.com.android.victorcs.mvvmarvel.data.model.*
 import br.com.android.victorcs.mvvmarvel.domain.mapper.DomainMapper
 import br.com.android.victorcs.mvvmarvel.domain.model.*
@@ -17,7 +18,7 @@ class CharacterMapper : DomainMapper<CharacterResponse, Character> {
             id = id,
             modified = modified,
             name = name,
-            resourceURI = resourceURI,
+            resourceURI = resourceURI?.toHttps(),
             series = series.map(),
             stories = stories.map(),
             thumbnail = thumbnail.map(),
@@ -26,7 +27,7 @@ class CharacterMapper : DomainMapper<CharacterResponse, Character> {
 
     private fun ComicsResponse.map(): Comics = Comics(
         available = available,
-        collectionURI = collectionURI,
+        collectionURI = collectionURI?.toHttps(),
         items = item?.mapGenericItemDto(),
         returned = returned
     )
@@ -35,27 +36,26 @@ class CharacterMapper : DomainMapper<CharacterResponse, Character> {
         available = available,
         returned = returned,
         items = item?.mapGenericItemDto(),
-        collectionURI = collectionURI
+        collectionURI = collectionURI?.toHttps()
     )
 
     private fun ThumbnailResponse.map(): Thumbnail = Thumbnail(
         extension = extension,
-        path = path
+        path = path?.toHttps()
     )
 
     private fun List<GenericItemResponse>.mapGenericItemDto(): List<GenericItem> = this.map { generic ->
         GenericItem(
             type = generic.type,
             name = generic.name,
-            resourceUri = generic.resourceUri
+            resourceUri = generic.resourceUri?.toHttps()
         )
     }
 
     private fun List<UrlResponse>.mapUrlDto(): List<Url> = this.map { mUrl ->
         Url(
             type = mUrl.type,
-            url = mUrl.url
+            url = mUrl.url?.toHttps()
         )
     }
 }
-

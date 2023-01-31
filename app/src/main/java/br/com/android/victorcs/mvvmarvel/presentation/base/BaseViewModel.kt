@@ -17,15 +17,17 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
     protected fun launch(
         errorBlock: ((Throwable) -> Unit?)? = null,
         block: suspend CoroutineScope.() -> Unit
-    ) =
-        viewModelScope.launch {
+    ) = viewModelScope.launch {
             _loading.postValue(true)
             runCatching { block() }
                 .onSuccess { _loading.postValue(false) }
                 .onFailure { error ->
                     _loading.postValue(false)
-                    if (errorBlock != null) errorBlock.invoke(error)
-                    else Timber.e(error)
+                    if (errorBlock != null) {
+                        errorBlock.invoke(error)
+                    } else {
+                        Timber.e(error)
+                    }
                 }
         }
 }

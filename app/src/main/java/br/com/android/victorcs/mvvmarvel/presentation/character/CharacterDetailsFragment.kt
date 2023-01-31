@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import br.com.android.victorcs.mvvmarvel.R
+import br.com.android.victorcs.mvvmarvel.presentation.utils.WebViewClientHandler
 
 class CharacterDetailsFragment : Fragment() {
 
@@ -36,18 +35,11 @@ class CharacterDetailsFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadCharacterDetailUrl() {
         arguments?.getString(CHARACTER_URL_KEY)?.let { characterUrl ->
-
             webView?.apply {
                 settings.javaScriptEnabled = true
-                webViewClient = object : WebViewClient() {
-                    override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                        view?.loadUrl(url ?: "")
-                        return true
-                    }
-                }
+                webViewClient = WebViewClientHandler()
                 loadUrl(characterUrl)
             }
-
         }
     }
 }

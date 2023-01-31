@@ -5,9 +5,10 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
-import br.com.android.victorcs.mvvmarvel.di.ModuleInitializer
+import br.com.android.victorcs.mvvmarvel.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.Timber
@@ -29,18 +30,16 @@ class App : MultiDexApplication(), LifecycleObserver {
     //endregion
 
     //region Private
-    private fun setupKoin() {
-        startKoin {
-            androidContext(this@App)
-            modules(
-                ModuleInitializer.modules
-            )
-            androidLogger(Level.DEBUG)
-        }
+    private fun setupKoin() = startKoin {
+        androidContext(this@App)
+        modules(
+            ModuleInitializer.modules
+        )
+        androidLogger(Level.DEBUG)
     }
 
-    private fun setupTimber(){
-        if(BuildConfig.DEBUG) {
+    private fun setupTimber() {
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
     }
