@@ -9,6 +9,7 @@ buildscript {
         classpath deps.classpath.kotlin
         classpath deps.classpath.detetk
         classpath deps.classpath.jacoco
+        classpath deps.classpath.hilt
     }
 }
 

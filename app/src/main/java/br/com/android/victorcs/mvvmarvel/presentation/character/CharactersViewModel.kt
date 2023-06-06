@@ -1,17 +1,20 @@
 package br.com.android.victorcs.mvvmarvel.presentation.character
 
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import br.com.android.victorcs.mvvmarvel.domain.repository.ICharacterRepository
 import br.com.android.victorcs.mvvmarvel.presentation.base.BaseViewModel
-import org.koin.core.component.KoinComponent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 private const val CHARACTER_DETAIL = "detail"
 
-class CharactersViewModel(
+@HiltViewModel
+class CharactersViewModel @Inject constructor(
     private val charactersRepository: ICharacterRepository
-) : BaseViewModel(), KoinComponent {
+) : BaseViewModel(), LifecycleObserver {
 
     private val _characters = MutableLiveData<List<Character>>()
     val character: LiveData<List<Character>> = _characters

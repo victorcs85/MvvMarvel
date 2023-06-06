@@ -8,8 +8,11 @@ import timber.log.Timber
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CloudErrorMapper {
+@Singleton
+class CloudErrorMapper @Inject constructor(){
 
     fun mapToDomainError(throwable: Throwable?): ErrorModel {
         val errorModel: ErrorModel? = when (throwable) {
@@ -46,9 +49,7 @@ class CloudErrorMapper {
     private fun getHttpError(body: ResponseBody?): ErrorModel {
         return try {
             val result = body?.string()
-            Timber.d("getErrorMessage() errorBody = [$result]")
-//            val json = Gson().fromJson(result, JsonObject::class.java)
-//            ErrorModel(json.toString(), 400, ErrorStatus.BAD_RESPONSE)
+            Timber.e("getErrorMessage() errorBody = [$result]")
             ErrorModel("", 400, ErrorStatus.BAD_RESPONSE)
         } catch (ex: Throwable) {
             ex.printStackTrace()

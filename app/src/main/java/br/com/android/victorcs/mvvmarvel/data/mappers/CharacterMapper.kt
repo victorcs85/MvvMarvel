@@ -4,8 +4,11 @@ import br.com.android.victorcs.mvvmarvel.data.extensions.toHttps
 import br.com.android.victorcs.mvvmarvel.data.model.*
 import br.com.android.victorcs.mvvmarvel.domain.mapper.DomainMapper
 import br.com.android.victorcs.mvvmarvel.domain.model.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CharacterMapper : DomainMapper<CharacterResponse, Character> {
+@Singleton
+class CharacterMapper @Inject constructor() : DomainMapper<CharacterResponse, Character> {
     override fun toDomain(from: CharacterResponse): Character = from.map()
 
     override fun toDomain(from: List<CharacterResponse>): List<Character> = from.map { toDomain(it) }

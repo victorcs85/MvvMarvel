@@ -6,25 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android.victorcs.mvvmarvel.R
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val NUMBER_COLUMNS = 2
 const val CHARACTER_URL_KEY = "mvvmarvel_character_url"
 const val CHARACTER_NAME_KEY = "mvvmarvel_character_name"
 
+@AndroidEntryPoint
 class CharactersFragment: Fragment() {
 
     //region Views
     private var rvCharacters: RecyclerView? = null
     //endregion
 
-    private val viewModel: CharactersViewModel by sharedViewModel()
+    private val viewModel: CharactersViewModel by viewModels()
 
     private val characterAdapter = CharactersAdapter { onClickCharacter(it) }
 

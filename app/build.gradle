@@ -3,8 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'com.google.dagger.hilt.android'
 }
-//apply plugin: 'kotlin-android-extensions'
 
 apply from: "$rootDir/core/versions.gradle"
 
@@ -52,18 +52,20 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraint_layout
 
-    implementation deps.koin.compiler
-    implementation deps.koin.android
+    implementation deps.hilt.android
+    kapt deps.hilt.compiler
 
     implementation deps.androidx.core_ktx
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.lifecycle
-    implementation deps.androidx.lifecycle_ext
+    implementation deps.androidx.lifecycle_viewmodel_compose
+    implementation deps.androidx.lifecycle_process
     implementation deps.androidx.lifecycle_livedata
     implementation deps.androidx.recyclerview
     implementation deps.androidx.navigation_fragment
     implementation deps.androidx.navigation_ui
+    implementation deps.androidx.lifecycle_viewmodel_ktx
 
     implementation deps.material.runtime
 
@@ -89,3 +91,6 @@ dependencies {
 
 }
 
+kapt {
+    correctErrorTypes = true
+}

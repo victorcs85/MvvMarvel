@@ -3,6 +3,7 @@ package br.com.android.victorcs.mvvmarvel.presentation
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.observe
@@ -11,9 +12,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import br.com.android.victorcs.mvvmarvel.R
 import br.com.android.victorcs.mvvmarvel.presentation.character.CharactersViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     //region Views
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     //endregion
 
     private lateinit var navController: NavController
-    private val viewModel: CharactersViewModel by viewModel()
+    private val viewModel: CharactersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

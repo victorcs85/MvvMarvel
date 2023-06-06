@@ -9,7 +9,9 @@ import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import br.com.android.victorcs.mvvmarvel.R
 import br.com.android.victorcs.mvvmarvel.presentation.utils.WebViewClientHandler
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharacterDetailsFragment : Fragment() {
 
     //region Views

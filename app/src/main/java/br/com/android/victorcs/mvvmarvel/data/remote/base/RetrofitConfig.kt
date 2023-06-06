@@ -1,14 +1,15 @@
 package br.com.android.victorcs.mvvmarvel.data.remote.base
 
 import br.com.android.victorcs.mvvmarvel.BuildConfig
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Interceptor
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.component.KoinComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-object RetrofitConfig: KoinComponent {
+object RetrofitConfig {
 
     private const val TIMEOUT = 30L
     private const val TIMEOUT_DEBUG = 120L
