@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading() {
         loadingView?.visibility = View.VISIBLE
         container?.visibility = View.GONE
-
     }
 
     private fun hideLoading() {

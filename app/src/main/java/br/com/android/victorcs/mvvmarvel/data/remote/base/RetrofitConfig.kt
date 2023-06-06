@@ -9,14 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
+private const val TIMEOUT = 30L
+private const val TIMEOUT_DEBUG = 120L
+private const val TS_KEY = "ts"
+private const val APIKEY_KEY = "apikey"
+private const val HASH_KEY = "hash"
+
 object RetrofitConfig {
-
-    private const val TIMEOUT = 30L
-    private const val TIMEOUT_DEBUG = 120L
-
-    private const val TS_KEY = "ts"
-    private const val APIKEY_KEY = "apikey"
-    private const val HASH_KEY = "hash"
 
     fun <T> create(
         service: Class<T>,

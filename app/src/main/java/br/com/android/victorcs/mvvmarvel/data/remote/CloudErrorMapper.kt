@@ -1,5 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.data.remote
 
+import br.com.android.victorcs.mvvmarvel.data.ZERO
 import br.com.android.victorcs.mvvmarvel.data.model.error.ErrorModel
 import br.com.android.victorcs.mvvmarvel.data.model.error.ErrorStatus
 import okhttp3.ResponseBody
@@ -11,6 +12,11 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 import javax.inject.Singleton
 
+private const val UNAUTHORIZED = 401
+private const val BAD_RESPONSE = 400
+private const val TIME_OUT = "TIME OUT!!"
+private const val CHECK_CONNECTION = "CHECK CONNECTION"
+
 @Singleton
 class CloudErrorMapper @Inject constructor(){
 
@@ -18,7 +24,7 @@ class CloudErrorMapper @Inject constructor(){
         val errorModel: ErrorModel? = when (throwable) {
 
             is HttpException -> {
-                if (throwable.code() == 401) {
+                if (throwable.code() == UNAUTHORIZED) {
                     ErrorModel(statusCode = ErrorStatus.UNAUTHORIZED, code = null, message = null)
                 } else {
                     getHttpError(throwable.response()?.errorBody())
@@ -26,15 +32,15 @@ class CloudErrorMapper @Inject constructor(){
             }
 
             is SocketTimeoutException -> {
-                ErrorModel("TIME OUT!!",0, ErrorStatus.TIMEOUT)
+                ErrorModel(TIME_OUT, ZERO, ErrorStatus.TIMEOUT)
             }
 
             is IOException -> {
-                ErrorModel("CHECK CONNECTION",0, ErrorStatus.NO_CONNECTION)
+                ErrorModel(CHECK_CONNECTION,ZERO, ErrorStatus.NO_CONNECTION)
             }
 
             is UnknownHostException -> {
-                ErrorModel("CHECK CONNECTION",0, ErrorStatus.NO_CONNECTION)
+                ErrorModel(CHECK_CONNECTION,ZERO, ErrorStatus.NO_CONNECTION)
             }
             else -> null
         }
@@ -50,7 +56,7 @@ class CloudErrorMapper @Inject constructor(){
         return try {
             val result = body?.string()
             Timber.e("getErrorMessage() errorBody = [$result]")
-            ErrorModel("", 400, ErrorStatus.BAD_RESPONSE)
+            ErrorModel("", BAD_RESPONSE, ErrorStatus.BAD_RESPONSE)
         } catch (ex: Throwable) {
             ex.printStackTrace()
             ErrorModel(statusCode = ErrorStatus.UNKNOWN, message = null, code = null)

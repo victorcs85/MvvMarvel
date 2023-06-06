@@ -1,3 +1,6 @@
 package br.com.android.victorcs.mvvmarvel.data.extensions
 
-fun String.toHttps() = this.replace("http://", "https://")
+private const val HTTPS = "https://"
+private const val HTTP = "http://"
+
+fun String.toHttps() = this.replace(HTTP, HTTPS)

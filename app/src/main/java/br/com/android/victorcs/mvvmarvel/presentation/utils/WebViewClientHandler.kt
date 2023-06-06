@@ -7,7 +7,7 @@ import android.webkit.WebViewClient
 class WebViewClientHandler : WebViewClient() {
     @SuppressWarnings("deprecation")
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-        view?.loadUrl(url ?: "")
+        view?.loadUrl(url ?: EMPTY)
         return true
     }
 

@@ -35,7 +35,7 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun loadCharacterDetailUrl() {
+    private fun loadCharacterDetailUrl() =
         arguments?.getString(CHARACTER_URL_KEY)?.let { characterUrl ->
             webView?.apply {
                 settings.javaScriptEnabled = true
@@ -43,5 +43,4 @@ class CharacterDetailsFragment : Fragment() {
                 loadUrl(characterUrl)
             }
         }
-    }
 }

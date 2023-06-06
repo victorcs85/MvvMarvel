@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import br.com.android.victorcs.mvvmarvel.domain.repository.ICharacterRepository
 import br.com.android.victorcs.mvvmarvel.presentation.base.BaseViewModel
+import br.com.android.victorcs.mvvmarvel.presentation.utils.EMPTY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class CharactersViewModel @Inject constructor(
     private val _characters = MutableLiveData<List<Character>>()
     val character: LiveData<List<Character>> = _characters
 
-    fun loadCharacters() {
+    fun loadCharacters() =
         launch(
             block = {
                 _characters.postValue(
@@ -27,10 +28,9 @@ class CharactersViewModel @Inject constructor(
                 )
             }
         )
-    }
 
     fun getCharacterUrl(character: Character) =
         character.urls?.first {
             it.type?.contains(CHARACTER_DETAIL, ignoreCase = false) ?: false
-        }?.url ?: ""
+        }?.url ?: EMPTY
 }

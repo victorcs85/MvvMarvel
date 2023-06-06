@@ -28,13 +28,11 @@ class CharactersAdapter(
         holder.bindView(getItem(position))
 
     class DiffCallback : DiffUtil.ItemCallback<Character>() {
-        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
-            return oldItem.id == newItem.id
-        }
+        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
-            return oldItem.id == newItem.id
-        }
+        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean =
+            oldItem.id == newItem.id
     }
 
     inner class CharacterViewHolder(

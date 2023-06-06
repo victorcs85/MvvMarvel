@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,7 @@ const val CHARACTER_URL_KEY = "mvvmarvel_character_url"
 const val CHARACTER_NAME_KEY = "mvvmarvel_character_name"
 
 @AndroidEntryPoint
-class CharactersFragment: Fragment() {
+class CharactersFragment : Fragment() {
 
     //region Views
     private var rvCharacters: RecyclerView? = null
@@ -43,15 +42,13 @@ class CharactersFragment: Fragment() {
         loadCharacters()
     }
 
-    private fun loadCharacters() {
+    private fun loadCharacters() =
         viewModel.loadCharacters()
-    }
 
-    private fun setupViewModel() {
+    private fun setupViewModel() =
         viewModel.character.observe(viewLifecycleOwner) { characters ->
             characterAdapter.submitList(characters)
         }
-    }
 
     private fun initComponents() {
         rvCharacters = activity?.findViewById(R.id.rv_characters) as? RecyclerView

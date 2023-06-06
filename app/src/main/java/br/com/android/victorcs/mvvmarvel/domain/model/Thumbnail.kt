@@ -4,6 +4,10 @@ import android.os.Parcelable
 import br.com.android.victorcs.mvvmarvel.presentation.utils.ImageVariantSizeEnum
 import kotlinx.android.parcel.Parcelize
 
+private const val EMPTY = ""
+private const val BAR = "/"
+private const val DOT = "."
+
 @Parcelize
 data class Thumbnail(
     val extension: String?,
@@ -29,5 +33,5 @@ data class Thumbnail(
 
 
     private fun getFullPathById(imageVariant: ImageVariantSizeEnum): String =
-        path?.plus("/")?.plus(imageVariant.value)?.plus(".")?.plus(extension.orEmpty()) ?: ""
+        path?.plus(BAR)?.plus(imageVariant.value)?.plus(DOT)?.plus(extension.orEmpty()) ?: EMPTY
 }
