@@ -1,15 +1,15 @@
 def version = [:]
-version.compileSdk = 31
+version.compileSdk = 33
 version.versionCode = 1
 version.versionName = '1.0'
 version.minSdk = 21
-version.targetSdk = 31
+version.targetSdk = 33
 version.cardView = '1.0.0'
 version.fragment = '1.5.0'
 version.constraintLayout = "2.0.4"
 version.glide = '4.9.0'
-version.gradle = '7.0.0'
-version.kotlin = '1.6.0'
+version.gradle = '7.1.3'
+version.kotlin = '1.7.20'
 version.lifecycle = '2.5.0'
 version.lifecycle_2 = '2.5.1'
 version.multidex = '1.0.3'
@@ -26,6 +26,7 @@ version.coroutines = '1.4.2'
 version.detekt = '1.10.0'
 version.coreKtx = '1.6.0'
 version.hilt = '2.44.2'
+version.accompanist = '0.31.5-beta'
 
 def androidx = [:]
 androidx.core_ktx = "androidx.core:core-ktx:$version.coreKtx"
@@ -84,6 +85,17 @@ moshi.adapters =  "com.squareup.moshi:moshi-adapters:$version.moshi"
 def coroutines = [:]
 coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version.coroutines"
 
+def compose = [:]
+compose.bom = 'androidx.compose:compose-bom:2023.06.01'
+compose.runtime = "androidx.compose.runtime:runtime"
+compose.ui = "androidx.compose.ui:ui"
+compose.foundation = "androidx.compose.foundation:foundation"
+compose.layout = "androidx.compose.foundation:foundation-layout"
+compose.material = "androidx.compose.material:material"
+compose.runtime = "androidx.compose.runtime:runtime-livedata"
+compose.ui_tooling = "androidx.compose.ui:ui-tooling"
+compose.accompanist = "com.google.accompanist:accompanist-themeadapter-material:$version.accompanist"
+
 def dependencies = [:]
 dependencies.androidx = androidx
 dependencies.classpath = classpath
@@ -98,6 +110,7 @@ dependencies.moshi = moshi
 dependencies.version = version
 dependencies.coroutines = coroutines
 dependencies.hilt = hilt
+dependencies.compose = compose
 
 ext.deps = dependencies
 

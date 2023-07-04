@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
 }
 
@@ -43,6 +43,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
     }
 }
 
@@ -85,6 +91,18 @@ dependencies {
 
     implementation deps.glide.runtime
     implementation deps.glide.compiler
+
+    implementation(platform(deps.compose.bom))
+    androidTestImplementation( platform(deps.compose.bom))
+
+    implementation deps.compose.runtime
+    implementation deps.compose.ui
+    implementation deps.compose.foundation
+    implementation deps.compose.layout
+    implementation deps.compose.material
+    implementation deps.compose.runtime
+    implementation deps.compose.ui_tooling
+    implementation deps.compose.accompanist
 
     androidTestImplementation deps_tests.junit
     androidTestImplementation deps_tests.expresso

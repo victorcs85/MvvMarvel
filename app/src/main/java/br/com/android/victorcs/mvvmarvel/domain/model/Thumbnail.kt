@@ -2,7 +2,7 @@ package br.com.android.victorcs.mvvmarvel.domain.model
 
 import android.os.Parcelable
 import br.com.android.victorcs.mvvmarvel.presentation.utils.ImageVariantSizeEnum
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 private const val EMPTY = ""
 private const val BAR = "/"
