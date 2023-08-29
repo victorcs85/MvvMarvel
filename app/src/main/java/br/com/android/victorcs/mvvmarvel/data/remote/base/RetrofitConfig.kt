@@ -62,7 +62,7 @@ object RetrofitConfig {
 
     private fun addApiKeyToRequests(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
-        val originalHttpUrl = chain.request().url()
+        val originalHttpUrl = chain.request().url
         val newUrl = originalHttpUrl.newBuilder()
             .addQueryParameter(TS_KEY, BuildConfig.API_TS)
             .addQueryParameter(APIKEY_KEY, BuildConfig.API_KEY)

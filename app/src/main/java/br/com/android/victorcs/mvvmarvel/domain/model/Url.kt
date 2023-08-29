@@ -7,4 +7,4 @@ import kotlinx.parcelize.Parcelize
 data class Url (
     val type: String?,
     val url: String?
-):Parcelable
+): Parcelable

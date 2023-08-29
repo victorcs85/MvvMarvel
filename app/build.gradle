@@ -92,6 +92,8 @@ dependencies {
     implementation deps.glide.runtime
     implementation deps.glide.compiler
 
+    implementation deps.coil.compose
+
     implementation(platform(deps.compose.bom))
     androidTestImplementation( platform(deps.compose.bom))
 

@@ -28,7 +28,7 @@
             android:id="@+id/view_background_detail"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@color/backgroundDetail"
+            android:background="@color/background_detail"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
