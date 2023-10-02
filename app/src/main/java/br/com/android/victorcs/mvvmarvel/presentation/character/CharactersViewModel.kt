@@ -1,5 +1,7 @@
 package br.com.android.victorcs.mvvmarvel.presentation.character
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,15 +19,19 @@ class CharactersViewModel @Inject constructor(
     private val charactersRepository: ICharacterRepository
 ) : BaseViewModel(), LifecycleObserver {
 
-    private val _characters = MutableLiveData<List<Character>>()
-    val character: LiveData<List<Character>> = _characters
+//    private val _characters = MutableLiveData<List<Character>>()
+//    val character: LiveData<List<Character>> = _characters
+    val characters: MutableState<List<Character>> = mutableStateOf(listOf())
 
     fun loadCharacters() =
         launch(
             block = {
-                _characters.postValue(
-                    charactersRepository.getCharacterList()
-                )
+//                _characters.postValue(
+//                    charactersRepository.getCharacterList()
+//                )
+                charactersRepository.getCharacterList().also {
+                    characters.value = it
+                }
             }
         )
 

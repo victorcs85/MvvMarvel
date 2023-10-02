@@ -5,7 +5,7 @@
     <string name="general_error">An error has occurred! Unable to load the information.</string>
 
     <string name="char_spider_man">Spider-Man</string>
-    <string name="characters_label">Personagens</string>
+    <string name="characters_label">Personagens da Marvel</string>
     <string name="back_button_description">Voltar</string>
     <string name="character_detail_label">Detalhes do personagem</string>
 </resources>

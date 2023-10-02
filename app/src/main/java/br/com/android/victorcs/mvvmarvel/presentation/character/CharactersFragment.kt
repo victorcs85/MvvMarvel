@@ -33,9 +33,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -43,6 +47,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import br.com.android.victorcs.mvvmarvel.presentation.compose.theme.mvvmTheme
@@ -75,18 +80,18 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initComponents()
-        setupViewModel()
+//        initComponents()
+//        setupViewModel()
         loadCharacters()
     }
 
     private fun loadCharacters() =
         viewModel.loadCharacters()
 
-    private fun setupViewModel() =
-        viewModel.character.observe(viewLifecycleOwner) { characters ->
+//    private fun setupViewModel() =
+//        viewModel.character.observe(viewLifecycleOwner) { characters ->
 //            characterAdapter.submitList(characters)
-        }
+//        }
 
     private fun initComponents() {
         rvCharacters = activity?.findViewById(R.id.rv_characters) as? RecyclerView
@@ -110,46 +115,6 @@ class CharactersFragment : Fragment() {
             }
         }
     }
-
-//    @Composable
-//    private fun SetupCharacterView() {
-//        Scaffold(
-//            content = {
-//                CharactersContent()
-//            }
-//        )
-//    }
-//
-//
-//    @Composable
-//    private fun CharactersContent() {
-//        val characters = remember { loadCharacters() }
-//
-//        LazyColumn(
-//            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-//        ) {
-//            items(
-//                count = characters.len,
-//                itemContent = {
-//                    CharacterItem(character = it)
-//                })
-//        }
-//    }
-//
-//    @Preview
-//    @Composable
-//    private fun CharacterItem(character: Character) {
-//        Row {
-//            Column(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth()
-//                    .align(Alignment.CenterVertically)
-//            ) {
-//                Text(text = character.name.orEmpty(), style = MaterialTheme.typography.h6)
-//            }
-//        }
-//    }
 
     val mockCharacters = listOf(
         Character(
@@ -633,18 +598,11 @@ class CharactersFragment : Fragment() {
 
     @Composable
     fun setUpCharacterItem(character: Character, onCharacterClick: (Character) -> Unit) {
-        val context = LocalContext.current
-        val screenWidth =
-            with(LocalDensity.current) { context.resources.displayMetrics.widthPixels }
-        val itemWidth = screenWidth / 2
-
         Column(
             modifier = Modifier
-                .padding(8.dp)
-                .width(itemWidth.dp)
+                .fillMaxWidth()
                 .height(180.dp)
                 .clickable { onCharacterClick(character) }
-                .padding(8.dp)
                 .shadow(4.dp, RoundedCornerShape(8.dp)),
             verticalArrangement = Arrangement.Bottom
         ) {
@@ -657,32 +615,29 @@ class CharactersFragment : Fragment() {
                         .fillMaxHeight(),
                     contentScale = ContentScale.Crop
                 )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(30.dp)
+                        .background(Color(0x77000000)),
+                    contentAlignment = Alignment.BottomCenter,
+                ) {
+                    Text(
+                        text = character.name ?: "",
+                        modifier = Modifier.shadow(
+                            clip = false,
+                            elevation = 2.dp,
+                            ambientColor = Color(0),
+                            spotColor = Color(0),
+                        ).padding(4.dp).wrapContentWidth().zIndex(-1f),
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
 
-//                Row {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(30.dp)
-                            .background(Color(0x77000000)),
-                        contentAlignment = Alignment.BottomCenter,
-                    ) {
-                        Text(
-                            text = character.name ?: "",
-                            modifier = Modifier.shadow(
-                                clip = false,
-                                elevation = 2.dp,
-                                ambientColor = Color(0),
-                                spotColor = Color(0),
-                            ).padding(4.dp).wrapContentWidth().zIndex(-1f),
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-
-                        )
-                    }
-//                }
+                    )
+                }
             }
         }
     }
@@ -718,9 +673,25 @@ class CharactersFragment : Fragment() {
     @Composable
     fun characterGridPreview() {
         mvvmTheme {
-            setUpCharacterGrid(
-                characters = mockCharacters
-            ) { character -> onClickCharacter(character) }
+            SetUpGrid(viewModel.characters.value)
+//            SetUpGrid(mockCharacters)
+        }
+    }
+
+    @Composable
+    private fun SetUpGrid(characters: List<Character>) {
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalItemSpacing = 16.dp
+        ) {
+            items(characters) { item ->
+                setUpCharacterItem(item) { character ->
+                    onClickCharacter(character)
+                }
+            }
         }
     }
 }
