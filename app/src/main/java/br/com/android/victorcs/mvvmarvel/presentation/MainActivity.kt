@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     //endregion
 
     private val viewModel: CharactersViewModel by viewModels()
-//    private val viewModel: CharactersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +64,4 @@ class MainActivity : AppCompatActivity() {
 
 
 
-}
-
-@Composable
-inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController): T {
-    val navGraphRoute = destination.parent?.route ?: return viewModel()
-    val parentEntry = remember(this) {
-        navController.getBackStackEntry(navGraphRoute)
-    }
-    return viewModel(parentEntry)
 }

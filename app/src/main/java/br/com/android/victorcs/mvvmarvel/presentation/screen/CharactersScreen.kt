@@ -1,6 +1,5 @@
 package br.com.android.victorcs.mvvmarvel.presentation.screen
 
-import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,19 +30,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import androidx.navigation.compose.rememberNavController
 import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import br.com.android.victorcs.mvvmarvel.domain.model.Comics
 import br.com.android.victorcs.mvvmarvel.domain.model.GenericList
 import br.com.android.victorcs.mvvmarvel.domain.model.Thumbnail
 import br.com.android.victorcs.mvvmarvel.domain.model.Url
-import br.com.android.victorcs.mvvmarvel.presentation.CHARACTERS
-import br.com.android.victorcs.mvvmarvel.presentation.CHARACTER_DETAIL
 import br.com.android.victorcs.mvvmarvel.presentation.EMPTY
 import br.com.android.victorcs.mvvmarvel.presentation.character.CharactersViewModel
-import br.com.android.victorcs.mvvmarvel.presentation.compose.theme.mvvmTheme
 import coil.compose.AsyncImage
-import dagger.hilt.android.AndroidEntryPoint
 
 private const val BACKGROUND_CHAR_NAME_COLOR = 0x77000000
 private const val Z_INDEX = -1f
@@ -113,25 +107,20 @@ private fun SetUpCharacterItem(character: Character, onNavigateToDetail: (String
 }
 
 @Composable
-fun CharactersScreen(viewModel: CharactersViewModel, onNavigateToDetail: (String, String) -> Unit) {
-//    mvvmTheme {
-        SetUpGrid(viewModel.characters.value, onNavigateToDetail)
-//    }
-}
+fun CharactersScreen(viewModel: CharactersViewModel, onNavigateToDetail: (String, String) -> Unit) =
+    SetUpGrid(viewModel.characters.value, onNavigateToDetail)
 
 @Preview
 @Composable
-private fun MockedCharacterGridPreview() {
-//    mvvmTheme {
+private fun MockedCharacterGridPreview() =
         SetUpGrid(mockCharacters, onNavigateToDetail = { url, name ->} )
 //        SetUpGrid(mockCharacters, onNavigateToDetail = { mockCharacters[0].urls?.firstOrNull()?.url.orEmpty(),
 //            mockCharacters[0].name.orEmpty() -> Unit} )
 //    }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SetUpGrid(characters: List<Character>, onNavigateToDetail: (String, String) -> Unit) {
+private fun SetUpGrid(characters: List<Character>, onNavigateToDetail: (String, String) -> Unit) =
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(TWO),
         modifier = Modifier.fillMaxSize(),
@@ -145,7 +134,6 @@ private fun SetUpGrid(characters: List<Character>, onNavigateToDetail: (String, 
             }
         }
     }
-}
 
 private val mockCharacters = listOf(
     Character(
