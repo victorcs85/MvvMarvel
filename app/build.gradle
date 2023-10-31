@@ -55,32 +55,35 @@ android {
 
 dependencies {
 
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.constraint_layout
-
     implementation deps.hilt.android
+    implementation deps.hilt.hilt_navigation
     kapt deps.hilt.compiler
+    kapt deps.hilt.compiler_android
 
     implementation deps.androidx.core_ktx
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.constraint_layout
-    implementation deps.androidx.lifecycle
+    implementation deps.androidx.activity_compose
+    implementation deps.androidx.compose_ui
+    implementation deps.androidx.compose_tooling
+    debugImplementation deps.androidx.compose_ui_tooling
+    debugImplementation deps.androidx.manifest
+    implementation deps.androidx.material3
+    implementation deps.androidx.lifecycle_compose
+    implementation deps.androidx.navigation_compose
+
+
     implementation deps.androidx.lifecycle_viewmodel_compose
     implementation deps.androidx.lifecycle_process
     implementation deps.androidx.lifecycle_livedata
-    implementation deps.androidx.recyclerview
-    implementation deps.androidx.navigation_fragment
-    implementation deps.androidx.navigation_ui
     implementation deps.androidx.lifecycle_viewmodel_ktx
 
     implementation deps.material.runtime
 
-    implementation deps.support.card_view
     implementation deps.support.multidex
 
     implementation deps.retrofit.runtime
     implementation deps.retrofit.converter_moshi
 
+    implementation deps.moshi.moshi
     implementation deps.moshi.runtime
     implementation deps.moshi.adapters
 
@@ -89,26 +92,13 @@ dependencies {
 
     implementation deps.others.timber
 
-    implementation deps.glide.runtime
-    implementation deps.glide.compiler
-
     implementation deps.coil.compose
 
-    implementation(platform(deps.compose.bom))
-    androidTestImplementation( platform(deps.compose.bom))
-
-    implementation deps.compose.runtime
-    implementation deps.compose.ui
-    implementation deps.compose.foundation
-    implementation deps.compose.layout
-    implementation deps.compose.material
-    implementation deps.compose.runtime
-    implementation deps.compose.ui_tooling
-    implementation deps.compose.accompanist
-
-    androidTestImplementation deps_tests.junit
-    androidTestImplementation deps_tests.expresso
-
+    testImplementation deps_tests.junit
+    androidTestImplementation deps_tests.junit4
+    androidTestImplementation deps_tests.junit_ext
+    androidTestImplementation deps_tests.expresso_core
+    androidTestImplementation deps_tests.navigation_test
 }
 
 kapt {

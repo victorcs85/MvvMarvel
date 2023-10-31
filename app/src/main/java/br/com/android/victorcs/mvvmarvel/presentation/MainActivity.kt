@@ -3,15 +3,26 @@ package br.com.android.victorcs.mvvmarvel.presentation
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import br.com.android.victorcs.mvvmarvel.R
 import br.com.android.victorcs.mvvmarvel.presentation.character.CharactersViewModel
+import br.com.android.victorcs.mvvmarvel.presentation.compose.theme.mvvmTheme
 import dagger.hilt.android.AndroidEntryPoint
+
+const val EMPTY = ""
+const val CHARACTER_URL_KEY = "mvvmarvel_character_url"
+const val CHARACTER_NAME_KEY = "mvvmarvel_character_name"
+const val CHARACTERS = "characters"
+const val CHARACTER_DETAIL = "character detail"
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,14 +32,16 @@ class MainActivity : AppCompatActivity() {
     private var container: FragmentContainerView? = null
     //endregion
 
-    private lateinit var navController: NavController
     private val viewModel: CharactersViewModel by viewModels()
+//    private val viewModel: CharactersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupNavController()
-        setupViews()
+        setContent {
+            mvvmTheme {
+                SetupNavController()
+            }
+        }
         initViewModel()
     }
 
@@ -38,11 +51,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             hideLoading()
         }
-    }
-
-    private fun setupViews() {
-        loadingView = findViewById(R.id.view_loading) as? ViewGroup
-        container = findViewById(R.id.fragment_container) as? FragmentContainerView
     }
 
     private fun showLoading() {
@@ -55,13 +63,15 @@ class MainActivity : AppCompatActivity() {
         container?.visibility = View.VISIBLE
     }
 
-    private fun setupNavController() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-        val graph =
-            navHostFragment.navController.navInflater.inflate(R.navigation.marvel_navigation)
-        navHostFragment.navController.graph = graph
-        navController = navHostFragment.navController
-        NavigationUI.setupActionBarWithNavController(this, navController)
+
+
+}
+
+@Composable
+inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController): T {
+    val navGraphRoute = destination.parent?.route ?: return viewModel()
+    val parentEntry = remember(this) {
+        navController.getBackStackEntry(navGraphRoute)
     }
+    return viewModel(parentEntry)
 }
