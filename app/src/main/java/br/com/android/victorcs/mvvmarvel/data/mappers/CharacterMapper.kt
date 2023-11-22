@@ -1,9 +1,19 @@
 package br.com.android.victorcs.mvvmarvel.data.mappers
 
 import br.com.android.victorcs.mvvmarvel.data.extensions.toHttps
-import br.com.android.victorcs.mvvmarvel.data.model.*
+import br.com.android.victorcs.mvvmarvel.data.model.CharacterResponse
+import br.com.android.victorcs.mvvmarvel.data.model.ComicsResponse
+import br.com.android.victorcs.mvvmarvel.data.model.GenericListResponse
+import br.com.android.victorcs.mvvmarvel.data.model.ThumbnailResponse
+import br.com.android.victorcs.mvvmarvel.data.model.GenericItemResponse
+import br.com.android.victorcs.mvvmarvel.data.model.UrlResponse
 import br.com.android.victorcs.mvvmarvel.domain.mapper.DomainMapper
-import br.com.android.victorcs.mvvmarvel.domain.model.*
+import br.com.android.victorcs.mvvmarvel.domain.model.Comics
+import br.com.android.victorcs.mvvmarvel.domain.model.GenericList
+import br.com.android.victorcs.mvvmarvel.domain.model.Thumbnail
+import br.com.android.victorcs.mvvmarvel.domain.model.Url
+import br.com.android.victorcs.mvvmarvel.domain.model.GenericItem
+import br.com.android.victorcs.mvvmarvel.domain.model.Character
 import javax.inject.Inject
 import javax.inject.Singleton
 

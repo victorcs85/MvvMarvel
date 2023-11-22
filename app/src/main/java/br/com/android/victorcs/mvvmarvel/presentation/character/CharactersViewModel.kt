@@ -16,6 +16,16 @@ class CharactersViewModel @Inject constructor(
 
     val characters: MutableState<List<Character>> = mutableStateOf(listOf())
 
+    init {
+        launch(
+            block = {
+                charactersRepository.getCharacterList().also {
+                    characters.value = it
+                }
+            }
+        )
+    }
+
     fun loadCharacters() =
         launch(
             block = {

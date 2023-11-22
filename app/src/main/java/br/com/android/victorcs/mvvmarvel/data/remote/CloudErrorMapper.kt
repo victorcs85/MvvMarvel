@@ -58,7 +58,7 @@ class CloudErrorMapper @Inject constructor(){
             Timber.e("getErrorMessage() errorBody = [$result]")
             ErrorModel("", BAD_RESPONSE, ErrorStatus.BAD_RESPONSE)
         } catch (ex: Throwable) {
-            ex.printStackTrace()
+            Timber.e(ex)
             ErrorModel(statusCode = ErrorStatus.UNKNOWN, message = null, code = null)
         }
 

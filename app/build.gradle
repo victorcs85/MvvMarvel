@@ -7,6 +7,7 @@ plugins {
 }
 
 apply from: "$rootDir/core/versions.gradle"
+apply from: "../config/detekt/detekt.gradle"
 
 android {
     compileSdkVersion deps.version.compileSdk
@@ -52,7 +53,6 @@ android {
     }
 }
 
-
 dependencies {
 
     implementation deps.hilt.android
@@ -93,6 +93,8 @@ dependencies {
     implementation deps.others.timber
 
     implementation deps.coil.compose
+
+//    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.3")
 
     testImplementation deps_tests.junit
     androidTestImplementation deps_tests.junit4
